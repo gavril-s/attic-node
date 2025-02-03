@@ -1,3 +1,8 @@
+### attic-node ###
+config.json
+storage/
+builds/
+
 # Created by https://www.toptal.com/developers/gitignore/api/go,goland,visualstudiocode,visualstudio,notepadpp,windows,linux,macos,git,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=go,goland,visualstudiocode,visualstudio,notepadpp,windows,linux,macos,git,python
 
