@@ -8,24 +8,47 @@ import (
 )
 
 const (
-	ConfigPath    = "./config.json"
-	FileChunkSize = 1024
+	ConfigPath     Path = "./config.json"
+	NodeIDFilePath Path = "./node_id.txt"
 )
 
-type StorageConfig struct {
-	Path     string `json:"path"`
-	Capacity string `json:"capacity"`
-}
-
 type Config struct {
-	MasterURL string          `json:"master_url"`
-	Host      string          `json:"host"`
-	Port      uint16          `json:"port"`
-	Storages  []StorageConfig `json:"storages"`
+	MasterURL         string
+	Host              string
+	Port              uint16
+	IsPersistent      bool
+	AcceptedChunkSize Capacity
+	Storages          []Storage
 }
 
-func NewConfig() (*Config, error) {
-	configFile, err := os.Open(ConfigPath)
+func NewConfig(config JSONConfig) (*Config, error) {
+	var err error
+
+	storages := make([]Storage, len(config.Storages))
+	for i, storage := range config.Storages {
+		storages[i], err = NewStorage(storage)
+		if err != nil {
+			return nil, fmt.Errorf("NewStorage: %w", err)
+		}
+	}
+
+	acceptedChunkSize, err := ParseCapacity(config.AcceptedChunkSize)
+	if err != nil {
+		return nil, fmt.Errorf("ParseCapacity: %w", err)
+	}
+
+	return &Config{
+		MasterURL:         config.MasterURL,
+		Host:              config.Host,
+		Port:              config.Port,
+		IsPersistent:      config.IsPersistent,
+		AcceptedChunkSize: acceptedChunkSize,
+		Storages:          storages,
+	}, nil
+}
+
+func ReadConfig() (*Config, error) {
+	configFile, err := os.Open(ConfigPath.String())
 	if err != nil {
 		return nil, fmt.Errorf("failed to open config: %w", err)
 	}
@@ -36,13 +59,13 @@ func NewConfig() (*Config, error) {
 		return nil, fmt.Errorf("failed to read config: %w", err)
 	}
 
-	var config Config
+	var config JSONConfig
 	err = json.Unmarshal(configContent, &config)
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse config: %w", err)
 	}
 
-	return &config, nil
+	return NewConfig(config)
 }
 
 func (c *Config) Address() string {

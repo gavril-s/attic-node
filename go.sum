@@ -1,0 +1,6 @@
+github.com/gavril-s/attic-master v0.0.0-20250204220537-c1410831f771 h1:aT2h7Mz3bd9KOgTOBwulM1CjF61FdZyDD9bUF9Z1amE=
+github.com/gavril-s/attic-master v0.0.0-20250204220537-c1410831f771/go.mod h1:oQ3z40qQuh2lgssU8HEe0iYhw/e9JmKFto1YLkv7Y/M=
+github.com/gavril-s/attic-master v0.0.0-20250205000145-3f77d14f12af h1:iBt8J6FqtljepBpSZeUgpwoIk3pXHKPAxPeDX2lTY1c=
+github.com/gavril-s/attic-master v0.0.0-20250205000145-3f77d14f12af/go.mod h1:oQ3z40qQuh2lgssU8HEe0iYhw/e9JmKFto1YLkv7Y/M=
+github.com/gorilla/websocket v1.5.3 h1:saDtZ6Pbx/0u+bgYQ3q96pZgCzfhKXGPqt7kZ72aNNg=
+github.com/gorilla/websocket v1.5.3/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=

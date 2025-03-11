@@ -1,0 +1,13 @@
+{
+    "master_url": "localhost:80",
+    "host": "localhost",
+    "port": 8080,
+    "is_persistent": true,
+    "accepted_chunk_size": "1M",
+    "storages": [
+        {
+            "path": "./storage",
+            "capacity": "1G"
+        }
+    ]
+}

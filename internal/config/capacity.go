@@ -1,4 +1,4 @@
-package domain
+package config
 
 import (
 	"fmt"
@@ -53,4 +53,8 @@ func ParseCapacity(s string) (Capacity, error) {
 	}
 
 	return Capacity(amount * unitSize), nil
+}
+
+func (c Capacity) Bytes() uint64 {
+	return uint64(c)
 }
